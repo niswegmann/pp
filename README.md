@@ -1,6 +1,9 @@
 PP
 ==
 
+This package provides a highly optimized easy-to-use
+pretty-printer that doesn't care about page-widths.  
+
 Install
 -------
 

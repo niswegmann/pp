@@ -14,8 +14,8 @@ cabal-version:       >= 1.10
 
 description:
 
-  This package provides an simple-to-use optimized
-  pretty-printer that doesn't care about pagewidths.
+  This package provides a highly optimized easy-to-use
+  pretty-printer that doesn't care about page-widths.  
 
 source-repository head
   type:     git
