@@ -16,7 +16,7 @@ An optimized pretty-printer that doesn't care about pagewidths.
 
 module Text.PP
   ( Doc (..)
-  , PageWidth
+--  , PageWidth
   , Indent
   , empty
   , string
@@ -36,7 +36,7 @@ import qualified Data.Text as Text
 
 --------------------------------------------------------------------------------
 
-type PageWidth = Int
+--type PageWidth = Int
 type Indent    = Int
 
 -- | A document.
