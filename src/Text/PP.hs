@@ -148,7 +148,12 @@ concatH = List.foldr ($$) empty
 
 -- | Renders a document.
 render :: Doc -> Text
-render = textBoxToText . render_tbx
+render = tbx2text . doc2tbx
+
+--------------------------------------------------------------------------------
+
+indentDText :: Int -> DText -> DText
+indentDText = mappend . flip DText.replicate ' '
 
 --------------------------------------------------------------------------------
 
@@ -158,9 +163,6 @@ type TextBox =
   , Bool        -- body is nill
   , Int         -- length of last line
   )
-
-indentDText :: Int -> DText -> DText
-indentDText = mappend . flip DText.replicate ' '
 
 empty_tbx :: TextBox
 empty_tbx =
@@ -216,17 +218,19 @@ beside_tbx (b1, l1, _, z1) (b2, l2, False, z2)  =
     , z1 + z2
     )
 
-render_tbx :: Doc -> TextBox
-render_tbx doc0 =
+--------------------------------------------------------------------------------
+
+doc2tbx :: Doc -> TextBox
+doc2tbx doc0 =
   case doc0 of
     Empty              -> empty_tbx
     Text cs            -> text_tbx cs
-    Indent k doc       -> indent_tbx k (render_tbx doc)
-    doc1 `Above`  doc2 -> render_tbx doc1 `above_tbx`  render_tbx doc2
-    doc1 `Beside` doc2 -> render_tbx doc1 `beside_tbx` render_tbx doc2
+    Indent k doc       -> indent_tbx k (doc2tbx doc)
+    doc1 `Above`  doc2 -> doc2tbx doc1 `above_tbx`  doc2tbx doc2
+    doc1 `Beside` doc2 -> doc2tbx doc1 `beside_tbx` doc2tbx doc2
 
-textBoxToText :: TextBox -> Text
-textBoxToText (b, l, _, _) =
+tbx2text :: TextBox -> Text
+tbx2text (b, l, _, _) =
   Text.unlines $
     DList.toList $
       fmap DText.toText $
