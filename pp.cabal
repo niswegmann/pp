@@ -1,0 +1,29 @@
+name:                pp
+version:             1.0
+synopsis:            Efficient pretty-printing
+category:            Text
+stability:      	   provisional
+license:             PublicDomain
+license-file:        LICENSE
+author:              Nis N. Wegmann
+maintainer:          niswegmann@gmail.com
+homepage:            https://github.com/niswegmann/pp
+extra-source-files:  README.md
+build-type:          Simple
+cabal-version:       >= 1.10
+
+description:
+
+  This package provides an simple-to-use optimized
+  pretty-printer that doesn't care about pagewidths.
+
+source-repository head
+  type:     git
+  location: https://github.com/niswegmann/pp.git
+
+library
+  default-language:  Haskell2010
+  build-depends:     base (>= 4.0), text (>= 0.11), dtext (>= 1.0)
+  ghc-options:       -O2 -Wall -fwarn-tabs
+  hs-source-dirs:    src
+  exposed-modules:   Text.PP
